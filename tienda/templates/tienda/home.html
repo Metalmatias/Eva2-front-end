@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Gamer</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!---Navbar de tienda--->
+    <header class="navbar">
+        <div class="logo">🎮 Tienda Gamer</div>
+        <nav>
+            <a href="{% url 'home' %}">Inicio</a>
+            {% for categoria in categorias %}
+                <a href="{% url 'productos_por_categoria' categoria.slug %}">{{ categoria.nombre }}</a>
+            {% endfor %}
+        </nav>
+    </header>
+
+    <!--Banner principal -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>bienvenido a la tienda de videojuegos</h1>
+            <p>Encuentra los mejores juegos, consolas y accesorios al mejor precio</p>
+            <a href="{% url 'home' %}" class="btn">Ver productos</a>
+        </div>
+    </section>
+
+    <!-- Productos destacados -->
+    <main class="productos-container">
+        <h2>🎯 Juegos Destacados</h2>
+        <div class="productos-grid">
+            {% for producto in productos %}
+                <div class="producto-card">
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    <h3>{{ producto.nombre }}</h3>
+                    <p class="precio">${{ producto.precio }}</p>
+                    <a href="{% url 'detalle_producto' producto.id %}" class="btn-detalle">Ver Detalle</a>
+                </div>
+            {% empty %}
+                <p>No hay productos disponibles.</p>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!--footer de tienda-->
+    <footer>
+        <p>© 2025 Tienda Gamer</p>
+    </footer>
+
+</body>
+</html>

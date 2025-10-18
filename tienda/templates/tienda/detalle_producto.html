@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ producto.nombre }} - Detalle</title>
+    <link rel="stylesheet" href="{% static 'css/detalle_producto.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{{ producto.nombre }}</h1>
+        <a href="{% url 'home' %}" class="volver">Volver al inicio</a>
+    </header>
+
+    <main class="detalle-producto">
+        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+        <div class="info">
+            <h2>{{ producto.nombre }}</h2>
+            <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+            <p><strong>Stock:</strong> {{ producto.stock }}</p>
+            <p>{{ producto.descripcion }}</p>
+            <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+        </div>
+    </main>
+</body>
+</html>
